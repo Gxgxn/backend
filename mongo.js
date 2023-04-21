@@ -13,18 +13,22 @@ mongoose.set("strictQuery", false);
 mongoose.connect(url);
 
 const noteSchema = new mongoose.Schema({
-  content: String,
+  content: {
+    type: String,
+    minLength: 5,
+    required: true,
+  },
   date: Date,
   important: Boolean,
 });
 
 const Note = mongoose.model("Note", noteSchema);
 
-const note = new Note({
-  content: "Mongoose makes things easy",
-  date: new Date(),
-  important: true,
-});
+// const note = new Note({
+//   content: "Mongoose makes things easy",
+//   date: new Date(),
+//   important: true,
+// });
 
 /*
 note.save().then(result => {
