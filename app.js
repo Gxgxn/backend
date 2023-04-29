@@ -1,5 +1,6 @@
 const config = require("./utils/config");
 const express = require("express");
+require("express-async-errors"); //try-catch handler
 const app = express();
 const cors = require("cors");
 const notesRouter = require("./controllers/notes");
@@ -21,10 +22,12 @@ mongoose
   });
 
 app.use(cors());
-app.use(express.static("build"));
+app.use(express.static("dist"));
 app.use(express.json());
 app.use(middleware.requestLogger);
-
+// app.get("/", (req, res) => {
+//   res.send(path.join(__dirname, "dist", "index.html"));
+// });
 app.use("/api/notes", notesRouter);
 
 app.use(middleware.unknownEndpoint);
